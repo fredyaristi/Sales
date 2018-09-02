@@ -3,10 +3,11 @@
     using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using Helpers;
     using Sales.Common.Models;
     using Services;
+    using Views;
     using Xamarin.Forms;
-    using Helpers;
 
     public class ProductItemViewModel : Product
     {
@@ -22,6 +23,20 @@
         #endregion
 
         #region Commands
+        public ICommand EditProductCommand
+        {
+            get
+            {
+                return new RelayCommand(EditProduct);
+            }
+        }
+
+        private async void EditProduct()
+        {
+            MainViewModel.GetInstance().EditProduct = new EditProductViewModel(this);
+            await Application.Current.MainPage.Navigation.PushAsync(new EditProductPage());
+        }
+
         public ICommand DeleteProductCommand
         {
             get
