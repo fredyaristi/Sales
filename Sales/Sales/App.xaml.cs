@@ -17,7 +17,7 @@ namespace Sales
         {
             InitializeComponent();
 
-            if (Settings.IsRemembered && string.IsNullOrEmpty(Settings.AccessToken))
+            if (Settings.IsRemembered && !string.IsNullOrEmpty(Settings.AccessToken))
             {
                 MainViewModel.GetInstance().Products = new ProductsViewModel();
                 MainPage = new MasterPage();
